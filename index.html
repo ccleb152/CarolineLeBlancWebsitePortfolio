@@ -1,0 +1,738 @@
+<title>CC LeBlanc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
+<style>
+  :root{
+    --bg:#f6f0e7;
+    --surface:#ffffff;
+    --ink:#0b5471;
+    --muted:#797c82;
+    --line:#e2d9c8;
+    --eng:#0b5471;
+    --eng-tint:#e3eff4;
+    --creative:#85b7d6;
+    --creative-tint:#e7e6e8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12191c;
+      --surface:#1a2226;
+      --ink:#f6f0e7;
+      --muted:#a9adb3;
+      --line:#2c363b;
+      --eng:#85b7d6;
+      --eng-tint:#182a30;
+      --creative:#c7c2b6;
+      --creative-tint:#2a2925;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12191c;
+    --surface:#1a2226;
+    --ink:#f6f0e7;
+    --muted:#a9adb3;
+    --line:#2c363b;
+    --eng:#85b7d6;
+    --eng-tint:#182a30;
+    --creative:#c7c2b6;
+    --creative-tint:#2a2925;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Archivo","Segoe UI",Arial,sans-serif;
+    margin:0;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--creative);color:#fff;}
+
+  .serif{font-family:"Playfair Display","Georgia",serif;font-weight:600;text-wrap:balance;}
+  .shout{
+    font-family:"Bebas Neue","Archivo",sans-serif;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .eyebrow{
+    font-family:"Bebas Neue",sans-serif;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+  h1,h2,h3{margin:0;text-wrap:balance;}
+
+  /* ---- topbar ---- */
+  header.topbar{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:30;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 28px;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:640px){ header.topbar{padding:14px 18px;} }
+  header.topbar .brand{
+    font-family:"Playfair Display",serif;
+    font-weight:600;
+    font-size:1.35rem;
+    text-decoration:none;
+  }
+  header.topbar .brand em{color:var(--creative);font-style:italic;}
+  header.topbar nav{display:flex;gap:22px;align-items:center;}
+  header.topbar nav a{
+    text-decoration:none;
+    font-family:"Bebas Neue",sans-serif;
+    letter-spacing:0.08em;
+    font-size:0.95rem;
+    color:var(--muted);
+  }
+  header.topbar nav a:hover{color:var(--ink);}
+  header.topbar nav a.on{color:var(--ink);}
+
+  main{max-width:980px;margin:0 auto;padding:0 28px 100px;}
+  @media (max-width:640px){ main{padding:0 18px 80px;} }
+
+  .page{display:none;}
+  .page.active{display:block;animation:fade .4s ease;}
+  @media (prefers-reduced-motion:no-preference){
+    @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  }
+
+  .crumbs{
+    font-family:"Bebas Neue",sans-serif;
+    letter-spacing:0.08em;
+    font-size:0.85rem;
+    color:var(--muted);
+    padding-top:28px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .crumbs .cur{color:var(--ink);}
+  .crumbs.eng .cur{color:var(--eng);}
+  .crumbs.creative .cur{color:var(--creative);}
+
+  /* ---- home hero ---- */
+  .hero{padding-top:18px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;}
+  @media (max-width:760px){ .hero{grid-template-columns:1fr;} }
+  .hero h1{font-size:clamp(1.6rem,3.4vw,2.9rem);letter-spacing:-0.01em;}
+  .hero h1 em{color:var(--creative);font-style:italic;}
+  .bio{max-width:56ch;margin-top:16px;color:var(--muted);font-size:1.05rem;}
+  .bio-edu{max-width:56ch;margin-top:16px;padding-left:1.1em;display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:0.98rem;}
+  .bio-edu strong{color:var(--ink);}
+  .bio-edu ul{margin-top:4px;padding-left:1.2em;display:flex;flex-direction:column;gap:2px;font-size:0.9rem;}
+  .hero-links{display:flex;gap:18px;margin-top:20px;flex-wrap:wrap;}
+  .hero-links a{
+    font-family:"Bebas Neue",sans-serif;
+    letter-spacing:0.06em;
+    font-size:0.95rem;
+    text-decoration:underline;
+    text-underline-offset:4px;
+  }
+
+  .frame{
+    aspect-ratio:4/5;
+    border:1px solid var(--line);
+    background:
+      linear-gradient(90deg, transparent 9px, var(--line) 9px, var(--line) 10px, transparent 10px) 0 0/10px 100%,
+      linear-gradient(0deg, transparent 9px, var(--line) 9px, var(--line) 10px, transparent 10px) 0 0/100% 10px,
+      var(--surface);
+    background-repeat:no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    position:relative;
+  }
+  .frame::before,.frame::after{
+    content:"";
+    position:absolute;
+    width:14px;height:14px;
+    border:1px solid #fff;
+    z-index:2;
+  }
+  .frame::before{top:8px;left:8px;border-right:none;border-bottom:none;}
+  .frame::after{bottom:8px;right:8px;border-left:none;border-top:none;}
+  .frame .cap{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.8rem;color:var(--muted);}
+  .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:0;}
+
+  /* ---- fork: full-bleed split, cuts off mid-page ---- */
+  .fork{
+    display:flex;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    margin-top:64px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:700px){ .fork{flex-direction:column;} }
+
+  .fork-half{
+    position:relative;
+    flex:1 1 0%;
+    min-height:clamp(300px,42vh,480px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:44px 6vw;
+    color:#fff;
+    text-decoration:none;
+    overflow:hidden;
+    transition:flex-grow .45s cubic-bezier(.2,.8,.2,1);
+    border-right:1px solid rgba(255,255,255,0.22);
+  }
+  .fork-half:last-child{border-right:none;}
+  @media (max-width:700px){
+    .fork-half{border-right:none;border-bottom:1px solid rgba(255,255,255,0.22);min-height:260px;}
+    .fork-half:last-child{border-bottom:none;}
+  }
+  .fork-half:hover{flex-grow:1.5;}
+
+  .fork-bg{position:absolute;inset:0;z-index:0;}
+  .fork-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(10,10,10,.32), rgba(10,10,10,.58));
+  }
+  .fork-half.eng .fork-bg{background:url("engineering.jpg") center 82%/cover no-repeat;}
+  .fork-half.creative .fork-bg{background:url("creative.jpg") center 40%/cover no-repeat;}
+  .fork-half .cap{
+    position:absolute;bottom:14px;z-index:1;
+    font-family:"Bebas Neue",sans-serif;font-size:0.7rem;letter-spacing:0.06em;
+    color:rgba(255,255,255,0.55);
+  }
+  .fork-half.eng .cap{left:6vw;}
+  .fork-half.creative .cap{right:6vw;}
+
+  .fork-content{position:relative;z-index:1;max-width:34ch;}
+  .fork-half h2{
+    font-family:"Playfair Display",serif;
+    font-weight:600;
+    font-style:normal;
+    font-size:clamp(2rem,4.6vw,3.2rem);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .fork-half .arrow{
+    display:inline-block;
+    opacity:0.35;
+    transform:translateX(0);
+    transition:all .35s ease;
+    font-style:normal;
+  }
+  .fork-half:hover .arrow{opacity:1;transform:translateX(10px);}
+  .fork-tagline{margin-top:12px;font-size:0.95rem;color:rgba(255,255,255,0.82);}
+  .fork-chips{margin-top:22px;display:flex;flex-direction:column;gap:6px;}
+  .fork-chips span{font-size:0.85rem;color:rgba(255,255,255,0.68);}
+
+  /* ---- home extras ---- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px;}
+  @media (max-width:700px){ .split{grid-template-columns:1fr;} }
+  .block h3{font-family:"Playfair Display",serif;font-weight:600;font-size:1.5rem;margin-bottom:14px;}
+  .edu-card{border:1px solid var(--line);padding:16px;margin-bottom:12px;background:var(--surface);}
+  .edu-card .meta{font-family:"Bebas Neue",sans-serif;letter-spacing:0.04em;font-size:0.85rem;color:var(--muted);margin-top:4px;}
+  .involve-list{display:flex;flex-direction:column;gap:6px;font-size:0.95rem;}
+
+  footer.pagefoot{
+    margin-top:72px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.85rem;color:var(--muted);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
+
+  /* ---- hub pages ---- */
+  .hub-head{padding-top:14px;}
+  .hub-head h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.2rem);margin-top:8px;}
+  .hub-head p{color:var(--muted);max-width:60ch;margin-top:12px;}
+  .tool-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .tool-strip span{
+    font-family:"Archivo",sans-serif;font-size:0.78rem;font-weight:600;
+    padding:6px 11px;border:1px solid var(--line);background:var(--surface);
+  }
+  .status{
+    display:inline-block;font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;
+    font-size:0.78rem;padding:4px 10px;border:1px solid currentColor;margin-bottom:10px;
+  }
+  .status.eng{color:var(--eng);}
+  .status.creative{color:var(--creative);}
+
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;}
+  @media (max-width:700px){ .card-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    border:1px solid var(--line);background:var(--surface);
+    padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;
+    transition:border-color .15s ease;
+  }
+  .proj-card:hover{border-color:var(--muted);}
+  .proj-card h3{font-family:"Playfair Display",serif;font-weight:600;font-size:1.5rem;}
+  .proj-card .tag{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.78rem;}
+  .proj-card.eng .tag{color:var(--eng);}
+  .proj-card.creative .tag{color:var(--creative);}
+  .proj-card p{color:var(--muted);font-size:0.92rem;margin:0;}
+  .proj-card .go{margin-top:auto;font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.85rem;}
+
+  /* ---- detail pages ---- */
+  .detail-head{padding-top:10px;}
+  .detail-head h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2rem,5vw,3rem);margin-top:8px;}
+  .detail-head .sub{color:var(--muted);max-width:62ch;margin-top:10px;}
+  .fact-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px;
+  }
+  .fact-row .f{background:var(--surface);padding:14px;}
+  .fact-row .f .k{font-family:"Bebas Neue",sans-serif;font-size:0.7rem;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;}
+  .fact-row .f .v{font-size:0.94rem;font-weight:600;margin-top:2px;}
+  .prose{margin-top:30px;max-width:66ch;}
+  .prose ul{padding-left:1.2em;display:flex;flex-direction:column;gap:10px;}
+  .prose p{margin-top:0;}
+
+  .two-figs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px;}
+  @media (max-width:640px){ .two-figs{grid-template-columns:1fr;} }
+  .fig{
+    border:1px dashed var(--line);background:var(--eng-tint);
+    aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:16px;
+  }
+  .page[data-parent="creative"] .fig{background:var(--creative-tint);}
+  .fig .cap{font-family:"Bebas Neue",sans-serif;font-size:0.78rem;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;}
+
+  .back{
+    display:inline-flex;align-items:center;gap:6px;margin-top:48px;
+    text-decoration:none;font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.92rem;
+  }
+  .page[data-parent="engineering"] .back{color:var(--eng);}
+  .page[data-parent="creative"] .back{color:var(--creative);}
+
+  /* ---- contact ---- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+  @media (max-width:640px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-card{border:1px solid var(--line);background:var(--surface);padding:22px;display:flex;flex-direction:column;gap:6px;}
+  .contact-card .k{font-family:"Bebas Neue",sans-serif;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+  .contact-card .v{font-size:1.05rem;}
+  .contact-card a{text-decoration:underline;text-underline-offset:3px;}
+
+  :focus-visible{outline:2px solid var(--creative);outline-offset:2px;}
+</style>
+
+<header class="topbar">
+  <a href="#home" class="brand">CC <em>LeBlanc</em></a>
+  <nav id="topnav">
+    <a href="#engineering" data-top="engineering">Engineering</a>
+    <a href="#creative" data-top="creative">Creative</a>
+    <a href="#contact" data-top="contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section class="page" id="page-home">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Mechanical Engineer &amp; Communications Lead</span>
+        <h1 class="serif">Caroline <em>“CC”</em> LeBlanc</h1>
+        <ul class="bio-edu">
+          <li><strong>MBA, Business Analytics</strong>
+            <ul>
+              <li>Manderson Graduate School of Business, University of Alabama. Expected May 2027.</li>
+              <li>GPA 3.75</li>
+            </ul>
+          </li>
+          <li><strong>B.S. Mechanical Engineering</strong>
+            <ul>
+              <li>Styslinger College of Engineering, University of Alabama. May 2026.</li>
+              <li>GPA 3.49, Honors College</li>
+            </ul>
+          </li>
+          <li>Fundamentals of Engineering (FE) Exam, passed.</li>
+        </ul>
+        <div class="hero-links">
+          <a href="mailto:caroline.leblanc152@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/carolinecleblanc" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+          <a href="#contact">Contact page</a>
+        </div>
+      </div>
+      <div class="frame">
+        <img src="headshot.jpg" alt="Caroline &quot;CC&quot; LeBlanc standing in front of Bryant-Denny Stadium">
+      </div>
+    </div>
+
+    <div class="fork">
+      <a class="fork-half eng" href="#engineering">
+        <div class="fork-bg"></div>
+        <div class="fork-content">
+          <h2>Engineering<span class="arrow">→</span></h2>
+          <p class="fork-tagline">Suspension design, tire modeling, and manufacturing process work.</p>
+          <div class="fork-chips">
+            <span>Tire Model &amp; Vehicle Dynamics</span>
+            <span>Suspension Geometry</span>
+            <span>BF Goodrich / Michelin</span>
+            <span>Marine Systems &amp; EDAG</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="fork-half creative" href="#creative">
+        <div class="fork-bg"></div>
+        <div class="fork-content">
+          <h2>Creative<span class="arrow">→</span></h2>
+          <p class="fork-tagline">Building the brand, systems, and people behind a team's public face.</p>
+          <div class="fork-chips">
+            <span>Building the Comms Subteam</span>
+            <span>Graphic Design</span>
+            <span>Photography</span>
+            <span>Videography</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="split" style="grid-template-columns:1fr;max-width:56ch;">
+      <div class="block">
+        <h3>Involvement</h3>
+        <div class="involve-list">
+          <div>Alabama FSAE (Crimson Racing)</div>
+          <div>Alabama Collegiate Recovery Community</div>
+          <div>Society of Automotive Engineers</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="pagefoot">
+      <span>CC LeBlanc — Portfolio</span>
+      <span>Updated 2026</span>
+    </footer>
+  </section>
+
+  <!-- ENGINEERING HUB -->
+  <section class="page" id="page-engineering" data-parent="engineering">
+    <div class="crumbs eng"><a href="#home">Home</a><span>/</span><span class="cur">Engineering</span></div>
+    <div class="hub-head">
+      <h1>Vehicle dynamics, tire behavior &amp; manufacturing</h1>
+      <p>Four projects, from race-car setup to tire-plant process work. The tire model is the one still evolving, everything else is shipped.</p>
+      <div class="tool-strip">
+        <span>MATLAB</span><span>Simulink</span><span>SolidWorks</span><span>AutoCAD</span>
+        <span>Motec i2</span><span>Bosch WinDarab</span><span>Cadmatic</span><span>WinGeo3</span>
+        <span>Power BI</span><span>Python</span><span>TIG Welding</span>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <a class="proj-card eng" href="#tire-model">
+        <span class="tag">In progress</span>
+        <h3>Tire Model &amp; Vehicle Dynamics</h3>
+        <p>A Pacejka Magic Formula model built on Calspan TTC data, now being ported from MATLAB to Python with a GUI.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card eng" href="#suspension">
+        <span class="tag">FSAE 2024–26</span>
+        <h3>Suspension Geometry</h3>
+        <p>Geometry package and camber/toe/caster targets across the full suspension travel range.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card eng" href="#manufacturing">
+        <span class="tag">Internship, 2026</span>
+        <h3>BF Goodrich / Michelin</h3>
+        <p>Profilometer measurement, skiver blade redesign, and spray bath flow analysis on treadline operations.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card eng" href="#eng-other">
+        <span class="tag">2025–26</span>
+        <h3>Marine Systems &amp; EDAG Capstone</h3>
+        <p>HVAC drawings for marine applications in the Netherlands, and a manufacturing guideline delivered to a German client.</p>
+        <span class="go">View project →</span>
+      </a>
+    </div>
+
+    <footer class="pagefoot">
+      <span>CC LeBlanc — Engineering</span>
+      <a href="#creative">See Creative work →</a>
+    </footer>
+  </section>
+
+  <!-- TIRE MODEL DETAIL -->
+  <section class="page" id="page-tire-model" data-parent="engineering">
+    <div class="crumbs eng"><a href="#home">Home</a><span>/</span><a href="#engineering">Engineering</a><span>/</span><span class="cur">Tire Model</span></div>
+    <div class="detail-head">
+      <span class="status eng">In progress — MATLAB → Python + GUI</span>
+      <h1>Pacejka Tire Model &amp; Vehicle Dynamics</h1>
+      <p class="sub">A MATLAB tool that turns raw tire test data into the curves a vehicle dynamics team actually designs around, built for Crimson Racing's suspension and setup work.</p>
+    </div>
+
+    <div class="fact-row">
+      <div class="f"><div class="k">Data source</div><div class="v">Calspan Tire Testing Consortium (TTC)</div></div>
+      <div class="f"><div class="k">Model</div><div class="v">Pacejka Magic Formula</div></div>
+      <div class="f"><div class="k">Sweeps handled</div><div class="v">Slip angle, inclination angle, pressure</div></div>
+      <div class="f"><div class="k">Outputs</div><div class="v">Fy–SA, Mz–SA curves</div></div>
+    </div>
+
+    <div class="prose">
+      <p>The tool ingests raw Calspan TTC data and automatically extracts the file structure across the variables that matter for characterizing a tire: slip angle (SA), inclination angle (IA / camber), and pressure. From there it smooths and fits the raw force and moment data into usable curves.</p>
+      <ul>
+        <li>Parses and organizes hundreds of raw test files by sweep variable (SA, IA, pressure) instead of handling them one at a time.</li>
+        <li>Smooths and fits raw lateral force and moment data using the Pacejka Magic Formula.</li>
+        <li>Outputs lateral force vs. slip angle (Fy–SA) and aligning moment vs. slip angle (Mz–SA) characterization curves, the core inputs for suspension and setup decisions.</li>
+        <li>Not yet wired into a lap sim. Right now it's a standalone characterization tool, with that integration as a future step.</li>
+      </ul>
+      <p>Currently being rebuilt: the MATLAB codebase is being translated to Python and paired with a GUI, so future vehicle dynamics team members without a MATLAB license or scripting background can run a characterization without touching code.</p>
+    </div>
+
+    <div class="two-figs">
+      <div class="fig"><span class="cap">Fy vs. SA plot<br>coming soon</span></div>
+      <div class="fig"><span class="cap">Mz vs. SA plot<br>coming soon</span></div>
+    </div>
+
+    <a class="back" href="#engineering">← Back to Engineering</a>
+  </section>
+
+  <!-- SUSPENSION DETAIL -->
+  <section class="page" id="page-suspension" data-parent="engineering">
+    <div class="crumbs eng"><a href="#home">Home</a><span>/</span><a href="#engineering">Engineering</a><span>/</span><span class="cur">Suspension Geometry</span></div>
+    <div class="detail-head">
+      <span class="status eng">Vehicle Dynamics Senior Engineer · FSAE 2024–2026</span>
+      <h1>Suspension Geometry</h1>
+      <p class="sub">Designing the geometry package that the tire model's outputs get applied to.</p>
+    </div>
+    <div class="prose">
+      <ul>
+        <li>Designed the suspension geometry package and set performance targets for camber, toe, and caster across the full suspension travel range.</li>
+        <li>Used driver feedback setup sheets (see below) alongside tire data to validate geometry choices against how the car actually drove.</li>
+        <li>Led the vehicle dynamics subsystem to a 6th place finish at FSAE Michigan in 2025 and 8th in 2026.</li>
+      </ul>
+      <p>Designed and deployed standardized driver feedback setup sheets, capturing the Cooper-Harper handling qualities scale alongside tire pressures, camber, and toe, so setups could be compared apples-to-apples across test days rather than relying on driver memory.</p>
+    </div>
+    <div class="fig" style="margin-top:30px;"><span class="cap">Suspension geometry diagram or CAD render placeholder</span></div>
+    <a class="back" href="#engineering">← Back to Engineering</a>
+  </section>
+
+  <!-- MANUFACTURING DETAIL -->
+  <section class="page" id="page-manufacturing" data-parent="engineering">
+    <div class="crumbs eng"><a href="#home">Home</a><span>/</span><a href="#engineering">Engineering</a><span>/</span><span class="cur">BF Goodrich</span></div>
+    <div class="detail-head">
+      <span class="status eng">Engineering Intern · May – Aug 2026</span>
+      <h1>BF Goodrich / Michelin, Tuscaloosa</h1>
+      <p class="sub">Process and quality engineering on treadline operations in a working tire plant.</p>
+    </div>
+    <div class="prose">
+      <ul>
+        <li>Implemented a profilometer measurement system on treadline operations so operators could quantitatively verify tread profiles instead of relying on visual inspection.</li>
+        <li>Designed new skiver blade components in SolidWorks to improve tread cut quality and reduce variability along treadline systems.</li>
+        <li>Ran flow analysis on spray bath systems in tread manufacturing lines to identify process optimization opportunities.</li>
+        <li>Gained hands-on exposure to tire manufacturing across carcass building and tread extrusion.</li>
+      </ul>
+    </div>
+    <div class="fig" style="margin-top:30px;"><span class="cap">Skiver blade CAD or profilometer setup photo placeholder</span></div>
+    <a class="back" href="#engineering">← Back to Engineering</a>
+  </section>
+
+  <!-- OTHER ENGINEERING DETAIL -->
+  <section class="page" id="page-eng-other" data-parent="engineering">
+    <div class="crumbs eng"><a href="#home">Home</a><span>/</span><a href="#engineering">Engineering</a><span>/</span><span class="cur">Marine &amp; EDAG</span></div>
+    <div class="detail-head">
+      <span class="status eng">International &amp; cross-functional work</span>
+      <h1>Marine Systems &amp; EDAG Capstone</h1>
+      <p class="sub">Two projects that pushed outside the race shop: an internship in the Netherlands, and a client-facing capstone.</p>
+    </div>
+    <div class="prose">
+      <p><strong>Engineering Intern, Heinen &amp; Hopman</strong> — Spakenburg, The Netherlands (May–Aug 2025)</p>
+      <ul>
+        <li>Performed heat transmission calculations in company software to cross-check Excel-based hand calculations.</li>
+        <li>Used AutoCAD to produce ventilation and HVAC system drawings for marine applications.</li>
+      </ul>
+      <p><strong>EDAG Student Team Lead</strong> — STEM GBA Capstone, The University of Alabama (Aug 2025–May 2026)</p>
+      <ul>
+        <li>Organized timelines and scope for a four-person student team.</li>
+        <li>Coordinated meetings and communicated final deliverables directly to German clients, producing a manufacturing facilities guideline.</li>
+      </ul>
+    </div>
+    <a class="back" href="#engineering">← Back to Engineering</a>
+  </section>
+
+  <!-- CREATIVE HUB -->
+  <section class="page" id="page-creative" data-parent="creative">
+    <div class="crumbs creative"><a href="#home">Home</a><span>/</span><span class="cur">Creative</span></div>
+    <div class="hub-head">
+      <span class="eyebrow creative">Right / Creative</span>
+      <h1>Brand, leadership &amp; design</h1>
+      <p>I took Crimson Racing's communications work from a one-person job to a subteam with real systems. Graphic design is shipped; photography and videography are next.</p>
+      <div class="tool-strip">
+        <span>Adobe Creative Cloud</span><span>Team leadership</span><span>Content strategy</span><span>Event outreach</span>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <a class="proj-card creative" href="#creative-team">
+        <span class="tag">May 2025 – present</span>
+        <h3>Building the Comms Subteam</h3>
+        <p>Turning a one-person role into a mentored subteam with real handoff systems.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card creative" href="#creative-design">
+        <span class="tag">Ongoing</span>
+        <h3>Graphic Design</h3>
+        <p>Social content, recruitment graphics, and print materials for the team.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card creative" href="#creative-photo">
+        <span class="tag">Coming soon</span>
+        <h3>Photography</h3>
+        <p>Event and competition photography, in progress.</p>
+        <span class="go">View project →</span>
+      </a>
+      <a class="proj-card creative" href="#creative-video">
+        <span class="tag">Coming soon</span>
+        <h3>Videography</h3>
+        <p>Recap and recruitment video work, in progress.</p>
+        <span class="go">View project →</span>
+      </a>
+    </div>
+
+    <footer class="pagefoot">
+      <span>CC LeBlanc — Creative</span>
+      <a href="#engineering">See Engineering work →</a>
+    </footer>
+  </section>
+
+  <!-- CREATIVE: TEAM DETAIL -->
+  <section class="page" id="page-creative-team" data-parent="creative">
+    <div class="crumbs creative"><a href="#home">Home</a><span>/</span><a href="#creative">Creative</a><span>/</span><span class="cur">Comms Subteam</span></div>
+    <div class="detail-head">
+      <span class="status creative">Communications Lead · May 2025 – present</span>
+      <h1>Building the Comms Subteam</h1>
+      <p class="sub">Crimson Racing's communications work used to be one person doing everything. I built it into a subteam with its own structure.</p>
+    </div>
+    <div class="prose">
+      <p>When I took over, communications was a single role with no real handoff process, whoever held it just carried everything in their head. I grew it into a subteam of four and built out separate systems so the work doesn't disappear when someone graduates.</p>
+      <ul>
+        <li>Lead a subteam of 4, mentoring members directly in Adobe software so design knowledge transfers between graduating classes instead of resetting every year.</li>
+        <li>Built out separate systems and workflows for the areas that used to live in one person's head: content, outreach, and print production.</li>
+        <li>Boosted engagement through outreach events, recruitment initiatives, and social media campaigns.</li>
+        <li>Designed and managed all digital and print communications: social content, website updates, and university outreach materials including flyers and promotional graphics.</li>
+      </ul>
+      <p>The same translation skill shows up off the team too: as EDAG Student Team Lead on our capstone, I presented our manufacturing facilities guideline directly to German clients, turning engineering work into something a non-technical stakeholder could act on.</p>
+    </div>
+    <a class="back" href="#creative">← Back to Creative</a>
+  </section>
+
+  <!-- CREATIVE: DESIGN DETAIL -->
+  <section class="page" id="page-creative-design" data-parent="creative">
+    <div class="crumbs creative"><a href="#home">Home</a><span>/</span><a href="#creative">Creative</a><span>/</span><span class="cur">Graphic Design</span></div>
+    <div class="detail-head">
+      <span class="status creative">Ongoing</span>
+      <h1>Graphic Design</h1>
+      <p class="sub">Social content, recruitment graphics, and print materials for Crimson Racing. Real samples go here next, this is the shape the gallery will take.</p>
+    </div>
+    <div class="two-figs">
+      <div class="fig"><span class="cap">Social post sample</span></div>
+      <div class="fig"><span class="cap">Recruitment flyer</span></div>
+    </div>
+    <div class="two-figs" style="margin-top:0;">
+      <div class="fig"><span class="cap">Competition send-off graphic</span></div>
+      <div class="fig"><span class="cap">Print material</span></div>
+    </div>
+    <a class="back" href="#creative">← Back to Creative</a>
+  </section>
+
+  <!-- CREATIVE: PHOTO DETAIL -->
+  <section class="page" id="page-creative-photo" data-parent="creative">
+    <div class="crumbs creative"><a href="#home">Home</a><span>/</span><a href="#creative">Creative</a><span>/</span><span class="cur">Photography</span></div>
+    <div class="detail-head">
+      <span class="status creative">Coming soon</span>
+      <h1>Photography</h1>
+      <p class="sub">Event and competition photography is on the way. This page is holding the spot until there's real work to show.</p>
+    </div>
+    <div class="fig" style="margin-top:20px;"><span class="cap">Photography samples coming soon</span></div>
+    <a class="back" href="#creative">← Back to Creative</a>
+  </section>
+
+  <!-- CREATIVE: VIDEO DETAIL -->
+  <section class="page" id="page-creative-video" data-parent="creative">
+    <div class="crumbs creative"><a href="#home">Home</a><span>/</span><a href="#creative">Creative</a><span>/</span><span class="cur">Videography</span></div>
+    <div class="detail-head">
+      <span class="status creative">Coming soon</span>
+      <h1>Videography</h1>
+      <p class="sub">Recap and recruitment video work is on the way. This page is holding the spot until there's real work to show.</p>
+    </div>
+    <div class="fig" style="margin-top:20px;"><span class="cap">Video samples coming soon</span></div>
+    <a class="back" href="#creative">← Back to Creative</a>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="page" id="page-contact">
+    <div class="crumbs"><a href="#home">Home</a><span>/</span><span class="cur">Contact</span></div>
+    <div class="detail-head">
+      <h1>Let’s talk.</h1>
+      <p class="sub">Open to full-time roles in motorsports engineering and business/data analytics. Based in Tuscaloosa, AL, willing to relocate.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="k">Email</span>
+        <span class="v"><a href="mailto:caroline.leblanc152@gmail.com">caroline.leblanc152@gmail.com</a></span>
+      </div>
+      <div class="contact-card">
+        <span class="k">LinkedIn</span>
+        <span class="v"><a href="https://www.linkedin.com/in/carolinecleblanc" target="_blank" rel="noopener">linkedin.com/in/carolinecleblanc</a></span>
+      </div>
+      <div class="contact-card">
+        <span class="k">Based in</span>
+        <span class="v">Tuscaloosa, AL</span>
+      </div>
+      <div class="contact-card">
+        <span class="k">Currently</span>
+        <span class="v">MBA Student, FSAE Team Lead, Quality Engineer at BF Goodrich</span>
+      </div>
+      <div class="contact-card">
+        <span class="k">Resume</span>
+        <span class="v"><a href="resume.pdf" target="_blank" rel="noopener">Download PDF</a></span>
+      </div>
+    </div>
+    <footer class="pagefoot">
+      <span>CC LeBlanc — Contact</span>
+      <a href="#home">Back to top →</a>
+    </footer>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var pageIds = [
+    "home","engineering","tire-model","suspension","manufacturing","eng-other",
+    "creative","creative-team","creative-design","creative-photo","creative-video","contact"
+  ];
+  var topLinks = document.querySelectorAll("#topnav a");
+
+  function show(id){
+    if(pageIds.indexOf(id) === -1) id = "home";
+    pageIds.forEach(function(p){
+      var el = document.getElementById("page-"+p);
+      if(el) el.classList.toggle("active", p === id);
+    });
+    var topId = id;
+    if(["tire-model","suspension","manufacturing","eng-other"].indexOf(id) !== -1) topId = "engineering";
+    if(["creative-team","creative-design","creative-photo","creative-video"].indexOf(id) !== -1) topId = "creative";
+    topLinks.forEach(function(a){
+      a.classList.toggle("on", a.getAttribute("data-top") === topId);
+    });
+    try{ window.scrollTo(0,0); }catch(e){}
+  }
+
+  function fromHash(){
+    var id = (location.hash || "#home").replace("#","");
+    show(id);
+  }
+
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+})();
+</script>
