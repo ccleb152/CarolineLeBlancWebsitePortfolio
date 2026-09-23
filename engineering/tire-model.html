@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tire Model · CC LeBlanc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<main data-parent="engineering">
+
+    <div class="crumbs eng"><a href="../index.html">Home</a><span>/</span><a href="index.html">Engineering</a><span>/</span><span class="cur">Tire Model</span></div>
+    <div class="detail-head">
+      <span class="status eng">In progress — MATLAB → Python + GUI</span>
+      <h1>Pacejka Tire Model &amp; Vehicle Dynamics</h1>
+      <p class="sub">A MATLAB tool that turns raw tire test data into the curves a vehicle dynamics team actually designs around, built for Crimson Racing's suspension and setup work.</p>
+    </div>
+
+    <div class="fact-row">
+      <div class="f"><div class="k">Data source</div><div class="v">Calspan Tire Testing Consortium (TTC)</div></div>
+      <div class="f"><div class="k">Model</div><div class="v">Pacejka Magic Formula</div></div>
+      <div class="f"><div class="k">Sweeps handled</div><div class="v">Slip angle, inclination angle, pressure</div></div>
+      <div class="f"><div class="k">Outputs</div><div class="v">Fy–SA, Mz–SA curves</div></div>
+    </div>
+
+    <div class="prose">
+      <p>The tool ingests raw Calspan TTC data and automatically extracts the file structure across the variables that matter for characterizing a tire: slip angle (SA), inclination angle (IA / camber), and pressure. From there it smooths and fits the raw force and moment data into usable curves.</p>
+      <ul>
+        <li>Parses and organizes hundreds of raw test files by sweep variable (SA, IA, pressure) instead of handling them one at a time.</li>
+        <li>Smooths and fits raw lateral force and moment data using the Pacejka Magic Formula.</li>
+        <li>Outputs lateral force vs. slip angle (Fy–SA) and aligning moment vs. slip angle (Mz–SA) characterization curves, the core inputs for suspension and setup decisions.</li>
+        <li>Not yet wired into a lap sim. Right now it's a standalone characterization tool, with that integration as a future step.</li>
+      </ul>
+      <p>Currently being rebuilt: the MATLAB codebase is being translated to Python and paired with a GUI, so future vehicle dynamics team members without a MATLAB license or scripting background can run a characterization without touching code.</p>
+    </div>
+
+    <div class="two-figs">
+      <div class="fig"><span class="cap">Fy vs. SA plot<br>coming soon</span></div>
+      <div class="fig"><span class="cap">Mz vs. SA plot<br>coming soon</span></div>
+    </div>
+
+    <a class="back" href="index.html">← Back to Engineering</a>
+
+</main>
+
+</body>
+</html>
