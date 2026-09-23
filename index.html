@@ -1,4 +1,5 @@
 <title>CC LeBlanc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
 <style>
   :root{
@@ -11,6 +12,10 @@
     --eng-tint:#e3eff4;
     --creative:#85b7d6;
     --creative-tint:#e7e6e8;
+    --band:#0b5471;
+    --band-ink:#f6f0e7;
+    --band-muted:#c3d6e0;
+    --band-line:rgba(246,240,231,0.18);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -23,6 +28,10 @@
       --eng-tint:#182a30;
       --creative:#c7c2b6;
       --creative-tint:#2a2925;
+      --band:#0c1215;
+      --band-ink:#f6f0e7;
+      --band-muted:#a9adb3;
+      --band-line:#2c363b;
     }
   }
   :root[data-theme="dark"]{
@@ -35,6 +44,10 @@
     --eng-tint:#182a30;
     --creative:#c7c2b6;
     --creative-tint:#2a2925;
+    --band:#0c1215;
+    --band-ink:#f6f0e7;
+    --band-muted:#a9adb3;
+    --band-line:#2c363b;
   }
 
   *{box-sizing:border-box;}
@@ -44,6 +57,7 @@
     font-family:"Archivo","Segoe UI",Arial,sans-serif;
     margin:0;
     line-height:1.6;
+    overflow-x:clip;
   }
   a{color:inherit;}
   img{max-width:100%;display:block;}
@@ -163,6 +177,77 @@
   .frame::after{bottom:8px;right:8px;border-left:none;border-top:none;}
   .frame .cap{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.8rem;color:var(--muted);}
   .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:0;}
+
+  /* ---- skills strip: full-bleed dark band ---- */
+  .skills{
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    margin-top:64px;
+    background:var(--band);
+    color:var(--band-ink);
+  }
+  .skills-inner{
+    max-width:980px;margin:0 auto;padding:44px 28px;
+    display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start;
+  }
+  @media (max-width:640px){ .skills-inner{padding:36px 18px;} }
+  @media (max-width:860px){ .skills-inner{grid-template-columns:1fr;gap:28px;} }
+  .skills .eyebrow{color:var(--creative);}
+  .skills h2{
+    font-family:"Playfair Display",serif;font-weight:600;
+    font-size:clamp(1.7rem,3vw,2.2rem);line-height:1.15;margin-top:6px;
+  }
+  .skills h2 em{color:var(--creative);font-style:italic;}
+  .skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  @media (max-width:860px){ .skill-grid{grid-template-columns:repeat(2,1fr);row-gap:28px;} }
+  @media (max-width:480px){ .skill-grid{grid-template-columns:1fr;} }
+  .skill{padding:0 20px;border-left:1px solid var(--band-line);}
+  .skill:first-child{border-left:none;padding-left:0;}
+  @media (max-width:860px){ .skill:nth-child(odd){border-left:none;padding-left:0;} }
+  @media (max-width:480px){ .skill{border-left:none;padding-left:0;} }
+  .skill svg{width:28px;height:28px;color:var(--creative);}
+  .skill h3{font-family:"Playfair Display",serif;font-weight:600;font-size:1.08rem;margin-top:12px;}
+  .skill p{font-size:0.84rem;line-height:1.5;color:var(--band-muted);margin:6px 0 0;}
+
+  /* ---- notable projects ---- */
+  .notable{
+    display:grid;grid-template-columns:200px 1fr;gap:36px;margin-top:64px;align-items:start;
+  }
+  @media (max-width:860px){ .notable{grid-template-columns:1fr;gap:24px;} }
+  .notable h2{
+    font-family:"Playfair Display",serif;font-weight:600;
+    font-size:clamp(1.9rem,3.4vw,2.6rem);line-height:1.1;margin-top:6px;
+  }
+  .notable h2 em{color:var(--creative);font-style:italic;}
+  .pill{
+    display:inline-block;margin-top:22px;padding:8px 18px;
+    background:var(--eng);color:var(--bg);text-decoration:none;
+    font-family:"Bebas Neue",sans-serif;letter-spacing:0.08em;font-size:0.9rem;
+    border-radius:999px;transition:opacity .15s ease;
+  }
+  .pill:hover{opacity:.85;}
+  .notable-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:640px){ .notable-grid{grid-template-columns:1fr;} }
+  .n-card{text-decoration:none;display:flex;flex-direction:column;}
+  .n-cover{
+    position:relative;aspect-ratio:4/5;overflow:hidden;
+    background:var(--eng-tint);border:1px solid var(--line);
+    display:flex;align-items:flex-end;padding:16px;
+  }
+  @media (max-width:640px){ .n-cover{aspect-ratio:16/10;} }
+  .n-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .n-card:hover .n-cover img{transform:scale(1.04);}
+  .n-cover .big{
+    position:relative;font-family:"Bebas Neue",sans-serif;letter-spacing:0.04em;
+    font-size:clamp(2.2rem,4vw,3rem);line-height:0.92;color:var(--eng);
+  }
+  .n-cover .big small{display:block;font-family:"Archivo",sans-serif;letter-spacing:0;font-size:0.72rem;font-weight:600;color:var(--muted);margin-top:8px;}
+  .n-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-top:12px;}
+  .n-meta h3{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:1.05rem;font-weight:400;}
+  .n-meta p{margin:0;font-size:0.8rem;color:var(--muted);}
+  .n-meta .arrow{transition:transform .25s ease;}
+  .n-card:hover .n-meta .arrow{transform:translateX(4px);}
 
   /* ---- fork: full-bleed split, cuts off mid-page ---- */
   .fork{
@@ -323,14 +408,14 @@
   :focus-visible{outline:2px solid var(--creative);outline-offset:2px;}
 </style>
 
-<header class="topbar">
+<!-- <header class="topbar">  change this to significant projects
   <a href="#home" class="brand">CC <em>LeBlanc</em></a>
   <nav id="topnav">
     <a href="#engineering" data-top="engineering">Engineering</a>
     <a href="#creative" data-top="creative">Creative</a>
     <a href="#contact" data-top="contact">Contact</a>
   </nav>
-</header>
+</header> -->
 
 <main>
 
@@ -367,6 +452,78 @@
       </div>
     </div>
 
+    <!-- SKILLS STRIP -->
+    <section class="skills" aria-labelledby="skills-title">
+      <div class="skills-inner">
+        <div>
+          <span class="eyebrow">Skills</span>
+          <h2 id="skills-title">What I bring <em>to a team</em></h2>
+        </div>
+        <div class="skill-grid">
+          <div class="skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/></svg>
+            <h3>Vehicle Dynamics</h3>
+            <p>Tire modeling, suspension geometry, and setup work backed by test data and driver feedback.</p>
+          </div>
+          <div class="skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>
+            <h3>CAD &amp; Manufacturing</h3>
+            <p>SolidWorks, AutoCAD, and Cadmatic design, plus hands-on process work on a tire plant floor.</p>
+          </div>
+          <div class="skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M7 16l4-5 3 3 5-7"/></svg>
+            <h3>Data &amp; Analytics</h3>
+            <p>MATLAB, Python, and Power BI, from raw sensor logs in Motec and WinDarab to clear decisions.</p>
+          </div>
+          <div class="skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+            <h3>Leadership &amp; Comms</h3>
+            <p>Built a four-person comms subteam and translate technical work for clients and sponsors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTABLE PROJECTS -->
+    <section class="notable" aria-labelledby="notable-title">
+      <div>
+        <span class="eyebrow">Notable Projects</span>
+        <h2 id="notable-title">Selected <em>work</em></h2>
+        <a class="pill" href="#engineering">View all projects</a>
+      </div>
+      <div class="notable-grid">
+        <a class="n-card" href="#tire-model">
+          <div class="n-cover">
+            <img src="engineering.jpg" alt="Hoosier racing tire on the Crimson Racing FSAE car" style="object-position:center 88%;">
+          </div>
+          <div class="n-meta">
+            <div><h3>Tire Model</h3><p>MATLAB → Python, Vehicle Dynamics</p></div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+        <a class="n-card" href="#suspension">
+          <!-- swap the .big text for an <img> once there's a CAD render -->
+          <div class="n-cover">
+            <span class="big">Camber<br>Toe<br>Caster<small>FSAE Michigan: 6th (2025), 8th (2026)</small></span>
+          </div>
+          <div class="n-meta">
+            <div><h3>Suspension Geometry</h3><p>FSAE, Design Lead</p></div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+        <a class="n-card" href="#manufacturing">
+          <!-- swap the .big text for an <img> once there's a plant photo -->
+          <div class="n-cover">
+            <span class="big">Tread<br>Line<small>Profilometer, skiver blades, spray bath flow</small></span>
+          </div>
+          <div class="n-meta">
+            <div><h3>BF Goodrich / Michelin</h3><p>Internship, Process Engineering</p></div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <div class="fork">
       <a class="fork-half eng" href="#engineering">
         <div class="fork-bg"></div>
@@ -382,6 +539,7 @@
         </div>
       </a>
 
+      <!-- SAVING THIS FOR LATER
       <a class="fork-half creative" href="#creative">
         <div class="fork-bg"></div>
         <div class="fork-content">
@@ -394,7 +552,7 @@
             <span>Videography</span>
           </div>
         </div>
-      </a>
+      </a> -->
     </div>
 
     <div class="split" style="grid-template-columns:1fr;max-width:56ch;">
@@ -404,6 +562,7 @@
           <div>Alabama FSAE (Crimson Racing)</div>
           <div>Alabama Collegiate Recovery Community</div>
           <div>Society of Automotive Engineers</div>
+          <div>Alpha Omicron Pi</div>
         </div>
       </div>
     </div>
@@ -562,7 +721,7 @@
   <section class="page" id="page-creative" data-parent="creative">
     <div class="crumbs creative"><a href="#home">Home</a><span>/</span><span class="cur">Creative</span></div>
     <div class="hub-head">
-      <span class="eyebrow creative">Right / Creative</span>
+      <span class="eyebrow creative">Creative</span>
       <h1>Brand, leadership &amp; design</h1>
       <p>I took Crimson Racing's communications work from a one-person job to a subteam with real systems. Graphic design is shipped; photography and videography are next.</p>
       <div class="tool-strip">
