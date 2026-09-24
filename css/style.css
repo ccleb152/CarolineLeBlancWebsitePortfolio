@@ -386,14 +386,6 @@ main section[id]{scroll-margin-top:20px;}
   background:var(--eng);color:var(--bg);display:flex;align-items:center;justify-content:center;
   font-family:"Bebas Neue",sans-serif;font-size:0.95rem;letter-spacing:0;
 }
-.eq{
-  margin:14px 0;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--eng);
-  overflow-x:auto;font-size:0.95rem;
-}
-.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 24px;margin:16px 0;}
-.terms div{display:flex;gap:10px;align-items:baseline;}
-.terms dt{min-width:3.2em;font-weight:600;color:var(--eng);}
-.terms dd{margin:0;color:var(--muted);font-size:0.92rem;}
 .repo-link{
   display:inline-flex;align-items:center;gap:14px;margin-top:18px;padding:12px 18px;
   border:1px solid var(--line);background:var(--surface);text-decoration:none;transition:border-color .15s ease;

@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tire Model · CC LeBlanc</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -16,7 +15,7 @@
     <div class="detail-head">
       <span class="status eng">In progress — MATLAB → Python + GUI</span>
       <h1>Pacejka Tire Model Development</h1>
-      <p class="sub">A tool that turns raw tire test data from Calspan into the tire behavior curves and coefficients Crimson Racing's vehicle dynamics team designs around.</p>
+      <p class="sub">A tool that turns raw tire test data from Calspan into the tire behavior curves and coefficients.</p>
     </div>
 
     <div class="fact-row">
@@ -27,19 +26,22 @@
     </div>
 
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a>
+      <a href="#overview">Overview</a>
       <a href="#how">How it works</a>
-      <a href="#model">The model</a>
       <a href="#rebuild">Python rebuild</a>
       <a href="#next">Next steps</a>
       <a href="#results">Results</a>
       <a href="#sources">Sources</a>
     </nav>
 
-    <section class="prose" id="problem">
-      <h2>The problem</h2>
-      <p>The tires are the only part of the car that touches the ground, so every suspension and setup decision depends on how they generate force. The TTC tests tires on a machine at Calspan and records hundreds of thousands of samples per round, sweeping slip angle, load, camber, and pressure. That raw data is too noisy and too large to design around directly.</p>
-      <p>This tool condenses it into a small set of Magic Formula coefficients: a compact equation that predicts lateral force and aligning moment for any load and camber inside the tested range.</p>
+    <section class="prose" id="overview">
+      <h2>Overview</h2>
+      <p>Crimson Racing didn't have a tire model. The team had access to Calspan tire test data, but no tool to turn it into something the vehicle dynamics team could design around, so I built one and have kept developing it for the team's use case.</p>
+      <p>The model was first built in MATLAB. I'm now translating it to Python so it's free to run and usable by future team members without a MATLAB license or a coding background.</p>
+      <a class="repo-link" href="https://github.com/ccleb152/PacejkaModelv2" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>View the code on GitHub<small>ccleb152/PacejkaModelv2</small></span>
+      </a>
     </section>
 
     <section class="prose" id="how">
@@ -53,44 +55,15 @@
       </ol>
     </section>
 
-    <section class="prose" id="model">
-      <h2>The model</h2>
-      <p>The Pacejka Magic Formula is an empirical tire model: rather than simulating rubber physics, it uses one flexible curve shape that matches measured tire behavior very closely. The tool follows the MF-Tire 6.1 formulation. Every force and moment is built from the same general form:</p>
-      <div class="eq">$$\begin{gathered}y = D\sin\!\Big[C\arctan\!\big\{Bx - E\,(Bx - \arctan Bx)\big\}\Big] + S_V \\[6pt] x = X + S_H\end{gathered}$$</div>
-      <dl class="terms">
-        <div><dt>\(D\)</dt><dd>Peak value: the most force the tire can make.</dd></div>
-        <div><dt>\(C\)</dt><dd>Shape factor: controls how the curve rises and falls off after the peak.</dd></div>
-        <div><dt>\(B\)</dt><dd>Stiffness factor. \(BCD\) is the slope at zero slip, the tire's cornering stiffness.</dd></div>
-        <div><dt>\(E\)</dt><dd>Curvature factor: how sharp or rounded the curve is around the peak.</dd></div>
-        <div><dt>\(S_H,\ S_V\)</dt><dd>Horizontal and vertical shifts from ply steer, conicity, and camber.</dd></div>
-      </dl>
-
-      <h3>Lateral force, \(F_{y0}\)</h3>
-      <p>Each factor is itself a function of normal load and camber, which is what lets one set of coefficients cover every tested condition. Load enters as the normalized change from a reference load \(F_{z0}'\), and camber as \(\gamma^* = \sin\gamma\):</p>
-      <div class="eq">$$\begin{gathered}df_z = \frac{F_z - F_{z0}'}{F_{z0}'} \\[6pt] \mu_y = (p_{Dy1} + p_{Dy2}\,df_z)(1 - p_{Dy3}\,\gamma^{*2}) \\[6pt] D_y = \mu_y F_z\end{gathered}$$</div>
-      <div class="eq">$$\begin{gathered}K_{y\alpha} = p_{Ky1}F_{z0}'\,\sin\!\left[p_{Ky4}\arctan\!\left(\frac{F_z}{(p_{Ky2} + p_{Ky5}\gamma^{*2})\,F_{z0}'}\right)\right](1 - p_{Ky3}\,|\gamma^*|) \\[6pt] B_y = \frac{K_{y\alpha}}{C_y D_y}\end{gathered}$$</div>
-      <div class="eq">$$\begin{gathered}E_y = (p_{Ey1} + p_{Ey2}\,df_z)\big[1 + p_{Ey5}\gamma^{*2} - (p_{Ey3} + p_{Ey4}\gamma^*)\,\mathrm{sgn}(\alpha)\big] \\[6pt] \alpha_y = \alpha + S_{Hy}\end{gathered}$$</div>
-      <p>Here \(\mu_y\) is the friction coefficient, which drops as load rises (load sensitivity), and \(K_{y\alpha}\) is the cornering stiffness.</p>
-
-      <h3>Aligning moment, \(M_{z0}\)</h3>
-      <p>The self-aligning moment is the lateral force times the pneumatic trail \(t\) (how far behind the contact patch center the force acts), plus a residual moment \(M_{zr}\):</p>
-      <div class="eq">$$M_{z0} = -\,t\,F_{y0} + M_{zr}$$</div>
-      <div class="eq">$$\begin{gathered}t = D_t\cos\!\Big[C_t\arctan\!\big\{B_t\alpha_t - E_t(B_t\alpha_t - \arctan B_t\alpha_t)\big\}\Big]\cos\alpha \\[6pt] M_{zr} = D_r\cos\!\big[\arctan(B_r\,\alpha_r)\big]\cos\alpha\end{gathered}$$</div>
-    </section>
-
     <section class="prose" id="rebuild">
       <h2>The Python rebuild</h2>
-      <p>The original tool is 11 MATLAB scripts. I'm porting it to Python with a Streamlit app, so future vehicle dynamics members without a MATLAB license or a scripting background can run a tire fit by double-clicking a launcher, loading a round, and pressing <em>Run Fit</em>.</p>
+      <p>The original tool is 11 MATLAB scripts. The Python version runs as a Streamlit app: double-click a launcher, load a test round, and press <em>Run Fit</em>.</p>
       <ul>
         <li><strong>Fits every tested load and camber automatically.</strong> The MATLAB version was hardcoded to one condition (50 lbf, 0° camber), so its load and camber terms were never truly fit.</li>
         <li><strong>Fixes bugs found during the port,</strong> including a missing lbf-to-newton conversion in the load-sensitivity stage and the wrong slip angle in the aligning-moment residual term.</li>
         <li><strong>Tested as it's ported.</strong> Each function is checked against the original MATLAB output, or hand-calculated values where MATLAB isn't available, before it's considered done.</li>
         <li><strong>Built for a lap sim.</strong> The model equations are kept as standalone functions, ready for a future lap-simulation integration.</li>
       </ul>
-      <a class="repo-link" href="https://github.com/ccleb152/PacejkaModelv2" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        <span>View the code on GitHub<small>ccleb152/PacejkaModelv2</small></span>
-      </a>
     </section>
 
     <section class="prose" id="next">
@@ -98,7 +71,7 @@
       <ul>
         <li><strong>Correlate with real team data.</strong> The model is fit to machine test data. Its predictions need to be checked against Crimson Racing's own on-car data logs and skidpad runs, then adjusted with scaling factors so the curves match the car on our track surface.</li>
         <li><strong>Estimate 16&Prime; longitudinal data.</strong> The TTC brake and drive tests we have only cover the 18&Prime; tires, while the team runs 16&Prime;. Longitudinal (braking and acceleration) behavior for the 16&Prime; tire has to be estimated from the 18&Prime; data and the 16&Prime; cornering results.</li>
-        <li><strong>Port the longitudinal and overturning models.</strong> Bring the MATLAB \(F_x\) and \(M_x\) fitting into the Python tool, then combine lateral and longitudinal for combined slip (cornering while braking or accelerating).</li>
+        <li><strong>Port the longitudinal and overturning models.</strong> Bring the MATLAB <em>F<sub>x</sub></em> and <em>M<sub>x</sub></em> fitting into the Python tool, then combine lateral and longitudinal for combined slip (cornering while braking or accelerating).</li>
         <li><strong>Load and camber cross terms.</strong> Fit how camber sensitivity changes with load, which needs test data at combined nonzero camber and off-nominal load.</li>
         <li><strong>Lap sim integration.</strong> Feed the fitted model into a lap-time simulation.</li>
       </ul>
@@ -129,6 +102,7 @@
       <!-- Add more sources as <li> entries below, newest ideas anywhere; they're numbered automatically. -->
       <ol>
         <li>H. B. Pacejka, <em>Tire and Vehicle Dynamics</em>, 3rd ed. Oxford: Butterworth-Heinemann, 2012.</li>
+        <li>W. F. Milliken and D. L. Milliken, <em>Race Car Vehicle Dynamics</em>. Warrendale, PA: SAE International, 1995.</li>
         <li>I. J. M. Besselink, A. J. C. Schmeitz, and H. B. Pacejka, &ldquo;An improved Magic Formula/Swift tyre model that can handle inflation pressure changes,&rdquo; <em>Vehicle System Dynamics</em>, vol. 48, sup. 1, pp. 337–352, 2010.</li>
         <li>C. H. Reinsch, &ldquo;Smoothing by spline functions,&rdquo; <em>Numerische Mathematik</em>, vol. 10, pp. 177–183, 1967.</li>
         <li>FSAE Tire Test Consortium, Calspan Tire Research Facility, Rounds 6, 8 &amp; 9 test data. <a href="https://www.millikenresearch.com/fsaettc.html" target="_blank" rel="noopener">millikenresearch.com/fsaettc</a></li>
@@ -139,9 +113,6 @@
 
 </main>
 
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
 <script src="../js/gallery.js"></script>
 
 </body>
