@@ -10,11 +10,10 @@ contact.html               Contact page
 engineering/
   index.html               Engineering hub (project cards)
   tire-model.html          One file per project
-  suspension.html          (draft)
-  bf-goodrich.html         (draft)
-  marine-edag.html         (draft)
-creative/                  (draft) Creative hub + project pages
-drafts/                    (draft) notes, e.g. cards-to-restore.html
+  suspension.html          (drafts branch only)
+  bf-goodrich.html         (drafts branch only)
+  marine-edag.html         (drafts branch only)
+creative/                  (drafts branch only) Creative hub + project pages
 css/style.css              All styling, shared by every page
 images/                    Photos
 resume.pdf
@@ -27,18 +26,32 @@ resume.pdf
 - **Add a photo:** put it in `images/`. From the home page use `images/name.jpg`; from a page inside `engineering/` or `creative/` use `../images/name.jpg`.
 - **Links between pages** are relative: inside a folder, `../` goes up to the site root.
 
-## Drafts (work in progress, not public)
+## Branches: `main` is live, `drafts` is everything
 
-Everything pushed to `main` goes live, and this repo is public. Unfinished
-pages are listed under **Drafts** in `.gitignore`, so Git never uploads them:
-they exist only on this computer. Preview them locally (in PyCharm,
-right-click the file → Open In → Browser).
+- **`main`** is the public website (GitHub Pages publishes it). It only has
+  finished pages. Anything pushed here goes live.
+- **`drafts`** has every page, finished or not, with all cards linked, so you
+  can preview the whole site. It's backed up on GitHub but not published.
+  (The repo is public, so drafts can still be read on GitHub itself.)
 
-To publish a draft page:
+Work on `drafts`. In PyCharm, switch branches from the branch name in the
+bottom-right corner (or top-left in the new UI). Switching branches swaps
+the files in the folder, so draft pages disappear while you're on `main`.
+That's expected.
 
-1. Delete its line under "Drafts" in `.gitignore`.
-2. Paste its cards back from `drafts/cards-to-restore.html` into the hub
-   page (and the home page, if it's a notable project).
-3. Commit and push to `main`.
+### Publishing a finished page
 
-Drafts aren't backed up to GitHub, so keep a copy somewhere else (OneDrive, etc.).
+Don't merge all of `drafts` into `main` (that would publish every draft).
+Bring over just the finished page:
+
+```
+git switch main
+git checkout drafts -- engineering/suspension.html
+```
+
+Then add its card to `engineering/index.html` (and the home page if it's a
+notable project) on `main`, commit, push, and `git switch drafts` to keep
+working.
+
+To pull changes you made on `main` into `drafts`:
+`git switch drafts` then `git merge main`.

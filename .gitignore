@@ -6,10 +6,3 @@
 Thumbs.db
 desktop.ini
 
-# Drafts: on this computer only, never pushed or published.
-# To publish one, delete its line here, then commit and push.
-drafts/
-creative/
-engineering/suspension.html
-engineering/bf-goodrich.html
-engineering/marine-edag.html
