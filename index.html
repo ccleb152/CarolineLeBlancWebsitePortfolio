@@ -59,6 +59,26 @@
             <span class="arrow" aria-hidden="true">→</span>
           </div>
         </a>
+        <a class="n-card" href="engineering/suspension.html">
+          <!-- swap the .big text for an <img> once there's a CAD render -->
+          <div class="n-cover">
+            <img src="images/Suspensiongeo.jpg" alt="Alabama FSAE CR26I Rear Suspension" style="object-position:center 88%;">
+          </div>
+          <div class="n-meta">
+            <div><h3>FSAE Suspension Geometry/Kinematics Design</h3><p>MATLAB, Motec i2, Windarab, SolidWorks</p></div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+        <a class="n-card" href="engineering/bf-goodrich.html">
+          <!-- swap the .big text for an <img> once there's a plant photo -->
+          <div class="n-cover">
+            <img src="images/bfgtire.jpg" alt="BFGoodrich Baja Tire" style="object-position:center 88%;">
+          </div>
+          <div class="n-meta">
+            <div><h3>BF Goodrich Tread Line Profilometer</h3><p>Internship, Process Engineering, Power BI</p></div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -77,7 +97,7 @@
           <div class="skill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>
             <h3>CAD &amp; Manufacturing</h3>
-            <p>SolidWorks, AutoCAD, and Cadmatic design, plus hands-on experience at BF Goodrich.</p>
+            <p>SolidWorks, AutoCAD, and Cadmatic design, plus hands-on process work on a tire plant floor.</p>
           </div>
           <div class="skill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M7 16l4-5 3 3 5-7"/></svg>
@@ -142,7 +162,7 @@
   // The site used to be one page with #links (e.g. /#tire-model).
   // Send anyone with an old bookmark to the matching new page.
   (function(){
-    var old = {"engineering":"engineering/index.html", "tire-model":"engineering/tire-model.html", "contact":"contact.html"};
+    var old = {"engineering":"engineering/index.html", "tire-model":"engineering/tire-model.html", "suspension":"engineering/suspension.html", "manufacturing":"engineering/bf-goodrich.html", "eng-other":"engineering/marine-edag.html", "creative":"creative/index.html", "creative-team":"creative/comms-subteam.html", "creative-design":"creative/graphic-design.html", "creative-photo":"creative/photography.html", "creative-video":"creative/videography.html", "contact":"contact.html"};
     var to = old[location.hash.slice(1)];
     if(to) location.replace(to);
   })();
