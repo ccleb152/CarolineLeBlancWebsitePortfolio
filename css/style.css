@@ -224,6 +224,9 @@ main{max-width:980px;margin:0 auto;padding:0 28px 100px;}
 .notable-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 @media (max-width:640px){ .notable-grid{grid-template-columns:1fr;} }
 .n-card{text-decoration:none;display:flex;flex-direction:column;}
+/* while only one project is public, show it as a wide feature card */
+.notable-grid:has(> .n-card:only-child){grid-template-columns:1fr;}
+.n-card:only-child .n-cover{aspect-ratio:16/9;}
 .n-cover{
   position:relative;aspect-ratio:4/5;overflow:hidden;
   background:var(--eng-tint);border:1px solid var(--line);
