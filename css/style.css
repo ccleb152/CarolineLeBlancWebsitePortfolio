@@ -330,6 +330,19 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .hub-head{padding-top:14px;}
 .hub-head h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.2rem);margin-top:8px;}
 .hub-head p{color:var(--muted);max-width:60ch;margin-top:12px;}
+/* full-width photo banner behind a hub page title (set the photo inline) */
+.hub-hero{
+  position:relative;display:flex;align-items:flex-end;
+  width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+  min-height:clamp(260px,42vh,440px);
+  background-size:cover;background-position:center 55%;color:#fff;
+}
+.hub-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,26,.25) 0%,rgba(10,20,26,.78) 100%);}
+.hub-hero-inner{position:relative;width:100%;max-width:980px;margin:0 auto;padding:28px 28px 34px;}
+@media (max-width:640px){ .hub-hero-inner{padding:22px 18px 26px;} }
+.hub-hero .crumbs{padding-top:0;color:rgba(255,255,255,.75);}
+.hub-hero .crumbs .cur{color:#fff;}
+.hub-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;margin-top:10px;max-width:20ch;}
 .tool-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
 .tool-strip span{
   font-family:"Archivo",sans-serif;font-size:0.78rem;font-weight:600;
