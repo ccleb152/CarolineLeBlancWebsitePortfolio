@@ -13,9 +13,8 @@
 
     <div class="crumbs eng"><a href="../index.html">Home</a><span>/</span><a href="index.html">Engineering</a><span>/</span><span class="cur">Tire Model</span></div>
     <div class="detail-head">
-      <span class="status eng">In progress — MATLAB → Python + GUI</span>
       <h1>Pacejka Tire Model Development</h1>
-      <p class="sub">A tool that turns raw tire test data from Calspan into the tire behavior curves and coefficients.</p>
+      <p class="sub">A tool that turns raw tire test data from Calspan into tire behavior curves and coefficients.</p>
     </div>
 
     <div class="fact-row">
@@ -36,8 +35,8 @@
 
     <section class="prose" id="overview">
       <h2>Overview</h2>
-      <p>Crimson Racing didn't have a tire model. The team had access to Calspan tire test data, but no tool to turn it into something the vehicle dynamics team could design around, so I built one and have kept developing it for the team's use case.</p>
-      <p>The model was first built in MATLAB. I'm now translating it to Python so it's free to run and usable by future team members without a MATLAB license or a coding background.</p>
+      <p>Historically, Crimson Racing didn't have a tire model and wasn't making data-backed decisions in regards to vehicle and tire performance. This model has been developed to solve that issue and post-process raw data from the TTC.</p>
+      <p>The model was first built in MATLAB. Now, it's being translated to Python so it is free to run and usable by future team members without a MATLAB license or coding background.</p>
       <a class="repo-link" href="https://github.com/ccleb152/PacejkaModelv2" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         <span>View the code on GitHub<small>ccleb152/PacejkaModelv2</small></span>
@@ -49,7 +48,7 @@
       <ol class="steps">
         <li><strong>Load a test round.</strong> Reads raw Calspan TTC files and identifies the tire (compound, diameter, width) from the file's own metadata.</li>
         <li><strong>Segment the data.</strong> Auto-detects every tested normal load and camber angle, then splits the round into one slice per test condition.</li>
-        <li><strong>Smooth each sweep.</strong> Fits a smoothing spline through the noisy slip-angle sweep so the model is fit to the tire's real trend, not sensor noise.</li>
+        <li><strong>Smooth each sweep.</strong> Fits a smoothing spline through the noisy slip-angle sweep.</li>
         <li><strong>Fit the Magic Formula.</strong> Solves for the coefficients with nonlinear least squares in stages: base curve first, then load sensitivity, then camber sensitivity.</li>
         <li><strong>Review and export.</strong> Plots raw data, smoothed curves, and the fitted model together, and exports the coefficients for the team to use.</li>
       </ol>
@@ -60,26 +59,24 @@
       <p>The original tool is 11 MATLAB scripts. The Python version runs as a Streamlit app: double-click a launcher, load a test round, and press <em>Run Fit</em>.</p>
       <ul>
         <li><strong>Fits every tested load and camber automatically.</strong> The MATLAB version was hardcoded to one condition (50 lbf, 0° camber), so its load and camber terms were never truly fit.</li>
-        <li><strong>Fixes bugs found during the port,</strong> including a missing lbf-to-newton conversion in the load-sensitivity stage and the wrong slip angle in the aligning-moment residual term.</li>
         <li><strong>Tested as it's ported.</strong> Each function is checked against the original MATLAB output, or hand-calculated values where MATLAB isn't available, before it's considered done.</li>
         <li><strong>Built for a lap sim.</strong> The model equations are kept as standalone functions, ready for a future lap-simulation integration.</li>
       </ul>
     </section>
 
     <section class="prose" id="next">
-      <h2>Next steps</h2>
+      <h2>Next steps/Additional work</h2>
       <ul>
-        <li><strong>Correlate with real team data.</strong> The model is fit to machine test data. Its predictions need to be checked against Crimson Racing's own on-car data logs and skidpad runs, then adjusted with scaling factors so the curves match the car on our track surface.</li>
+        <li><strong>Correlate with real data.</strong> The model is fit to machine test data. Its predictions need to be checked against Crimson Racing's own data, then adjusted with scaling factors so the curves match the car on our track surface.</li>
         <li><strong>Estimate 16&Prime; longitudinal data.</strong> The TTC brake and drive tests we have only cover the 18&Prime; tires, while the team runs 16&Prime;. Longitudinal (braking and acceleration) behavior for the 16&Prime; tire has to be estimated from the 18&Prime; data and the 16&Prime; cornering results.</li>
         <li><strong>Port the longitudinal and overturning models.</strong> Bring the MATLAB <em>F<sub>x</sub></em> and <em>M<sub>x</sub></em> fitting into the Python tool, then combine lateral and longitudinal for combined slip (cornering while braking or accelerating).</li>
-        <li><strong>Load and camber cross terms.</strong> Fit how camber sensitivity changes with load, which needs test data at combined nonzero camber and off-nominal load.</li>
         <li><strong>Lap sim integration.</strong> Feed the fitted model into a lap-time simulation.</li>
       </ul>
     </section>
 
     <section id="results">
       <div class="prose"><h2>Results so far</h2>
-        <p>Output from the Python tool on the Hoosier R20 16×7.5-10 at 12 psi (FSAE TTC Round 9). Faint dots are raw test data; solid lines are the fitted Magic Formula model.</p>
+        <p>Output from the Python tool on the Hoosier R20 16×7.5-10 at 12 psi (FSAE TTC Round 9). Faint dots are raw test data; solid lines are the fitted model.</p>
       </div>
       <div class="gallery" data-gallery>
         <div class="gallery-track" tabindex="0" aria-label="Tire model plots, scroll or use the arrow buttons">
