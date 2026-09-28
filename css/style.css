@@ -227,6 +227,10 @@ main{max-width:980px;margin:0 auto;padding:0 28px 100px;}
 /* while only one project is public, show it as a wide feature card */
 .notable-grid:has(> .n-card:only-child){grid-template-columns:1fr;}
 .n-card:only-child .n-cover{aspect-ratio:16/9;}
+/* two public projects: split the row evenly */
+.notable-grid:has(> .n-card:nth-child(2):last-child){grid-template-columns:repeat(2,1fr);}
+.notable-grid:has(> .n-card:nth-child(2):last-child) .n-cover{aspect-ratio:4/3;}
+@media (max-width:640px){ .notable-grid:has(> .n-card:nth-child(2):last-child){grid-template-columns:1fr;} }
 .n-cover{
   position:relative;aspect-ratio:4/5;overflow:hidden;
   background:var(--eng-tint);border:1px solid var(--line);
@@ -345,8 +349,8 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .hub-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;margin-top:10px;max-width:20ch;}
 .tool-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
 .tool-strip span{
-  font-family:"Archivo",sans-serif;font-size:0.78rem;font-weight:600;
-  padding:6px 11px;border:1px solid var(--line);background:var(--surface);
+  font-family:"Archivo",sans-serif;font-size:0.8rem;font-weight:600;color:var(--eng);
+  padding:6px 14px;border-radius:999px;background:var(--eng-tint);
 }
 .status{
   display:inline-block;font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;
@@ -381,6 +385,45 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .fact-row .f{background:var(--eng-tint);border-radius:18px;padding:18px 20px;}
 .fact-row .f .k{font-family:"Bebas Neue",sans-serif;font-size:0.85rem;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;}
 .fact-row .f .v{font-size:0.94rem;font-weight:600;margin-top:2px;}
+
+/* big-number result cards (same rounded look as .fact-row) */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:28px;}
+.stat{background:var(--eng-tint);border-radius:18px;padding:18px 20px;}
+.stat .num{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.1;color:var(--eng);white-space:nowrap;}
+.stat .lbl{font-size:0.85rem;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+/* accomplishment cards: what I did + measured result */
+.wins{display:flex;flex-direction:column;gap:18px;margin-top:4px;}
+.win{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;}
+.win h3{font-family:"Playfair Display",serif;font-weight:600;font-size:1.2rem;}
+.win p{margin:0;font-size:0.94rem;color:var(--muted);}
+.win .result{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);color:var(--ink);font-weight:600;}
+.win .result span{display:block;font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:0.08em;font-size:0.85rem;color:var(--eng);}
+/* card with a figure beside the text (stacks on narrow screens) */
+.win.has-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px 28px;align-items:start;}
+@media (max-width:760px){ .win.has-fig{grid-template-columns:1fr;} }
+.win-text{display:flex;flex-direction:column;gap:10px;height:100%;}
+.win-text a{color:var(--eng);text-underline-offset:3px;}
+.win-fig{margin:0;display:grid;gap:10px;}
+.win-fig.two{grid-template-columns:1fr 1fr;align-items:center;}
+.win-fig.two figcaption{grid-column:1 / -1;}
+.win-fig img{width:100%;max-height:440px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:#fff;}
+.win-fig figcaption{font-size:0.82rem;color:var(--muted);}
+.adjust{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px;font-size:0.92rem;color:var(--muted);}
+.adjust strong{color:var(--ink);font-weight:600;}
+
+/* tolerance tiers (FARO card) */
+.tiers{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media (max-width:640px){ .tiers{grid-template-columns:1fr;} }
+.tier{background:var(--eng-tint);border-radius:14px;padding:14px 16px;border-top:4px solid;}
+.tier.t1{border-top-color:#a4343a;}
+.tier.t2{border-top-color:#d9a441;}
+.tier.t3{border-top-color:#4f8a5b;}
+.tier h4{margin:0;font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:0.08em;font-size:1.05rem;}
+.tier p{margin:2px 0 8px;font-size:0.85rem;font-weight:600;color:var(--ink);}
+.tier ul{margin:0;padding-left:1.1em;font-size:0.85rem;color:var(--muted);}
+.tiers-note{grid-column:1 / -1;margin:0;font-size:0.85rem;color:var(--muted);}
+
 .prose{margin-top:30px;max-width:66ch;}
 .prose ul{padding-left:1.2em;display:flex;flex-direction:column;gap:10px;}
 .prose p{margin-top:0;}
@@ -417,6 +460,10 @@ main section[id]{scroll-margin-top:20px;}
 @media (prefers-reduced-motion:reduce){ .gallery-track{scroll-behavior:auto;} }
 .slide{flex:0 0 100%;scroll-snap-align:center;margin:0;}
 .slide img{width:100%;height:auto;border:1px solid var(--line);background:#f6f0e7;}
+/* mixed-size photos: same 3:2 frame for every slide so the buttons don't jump;
+   add class="fit" to a slide to show the whole image (e.g. CAD renders) instead of cropping */
+#gallery .slide img{aspect-ratio:3/2;object-fit:cover;border-radius:14px;}
+#gallery .slide.fit img{object-fit:contain;background:#fff;}
 .slide figcaption{margin-top:10px;color:var(--muted);font-size:0.9rem;max-width:66ch;}
 .gallery-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;}
 .gallery-btn{
