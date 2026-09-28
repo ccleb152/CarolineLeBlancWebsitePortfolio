@@ -379,7 +379,7 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
   gap:14px;margin-top:28px;
 }
 .fact-row .f{background:var(--eng-tint);border-radius:18px;padding:18px 20px;}
-.fact-row .f .k{font-family:"Bebas Neue",sans-serif;font-size:0.7rem;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;}
+.fact-row .f .k{font-family:"Bebas Neue",sans-serif;font-size:0.85rem;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;}
 .fact-row .f .v{font-size:0.94rem;font-weight:600;margin-top:2px;}
 .prose{margin-top:30px;max-width:66ch;}
 .prose ul{padding-left:1.2em;display:flex;flex-direction:column;gap:10px;}
@@ -387,7 +387,7 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 
 /* ---- long project pages: sections, equations, gallery, sources ---- */
 .toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.toc a{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:0.9rem;color:var(--muted);text-decoration:none;}
+.toc a{font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;font-size:1.05rem;color:var(--muted);text-decoration:none;}
 .toc a:hover{color:var(--eng);}
 main section[id]{scroll-margin-top:20px;}
 .prose h2{font-family:"Playfair Display",serif;font-weight:600;font-size:1.6rem;margin:48px 0 12px;}
