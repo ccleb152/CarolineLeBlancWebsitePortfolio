@@ -345,8 +345,8 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .hub-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;margin-top:10px;max-width:20ch;}
 .tool-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
 .tool-strip span{
-  font-family:"Archivo",sans-serif;font-size:0.78rem;font-weight:600;
-  padding:6px 11px;border:1px solid var(--line);background:var(--surface);
+  font-family:"Archivo",sans-serif;font-size:0.8rem;font-weight:600;color:var(--eng);
+  padding:6px 14px;border-radius:999px;background:var(--eng-tint);
 }
 .status{
   display:inline-block;font-family:"Bebas Neue",sans-serif;letter-spacing:0.06em;
