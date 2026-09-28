@@ -398,9 +398,6 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .win .result{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);color:var(--ink);font-weight:600;}
 .win .result span{display:block;font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:0.08em;font-size:0.85rem;color:var(--eng);}
 
-.photo{margin:36px 0 0;}
-.photo img{width:100%;border-radius:18px;}
-.photo figcaption{margin-top:10px;color:var(--muted);font-size:0.9rem;}
 .prose{margin-top:30px;max-width:66ch;}
 .prose ul{padding-left:1.2em;display:flex;flex-direction:column;gap:10px;}
 .prose p{margin-top:0;}
@@ -437,6 +434,10 @@ main section[id]{scroll-margin-top:20px;}
 @media (prefers-reduced-motion:reduce){ .gallery-track{scroll-behavior:auto;} }
 .slide{flex:0 0 100%;scroll-snap-align:center;margin:0;}
 .slide img{width:100%;height:auto;border:1px solid var(--line);background:#f6f0e7;}
+/* mixed-size photos: same 3:2 frame for every slide so the buttons don't jump;
+   add class="fit" to a slide to show the whole image (e.g. CAD renders) instead of cropping */
+#gallery .slide img{aspect-ratio:3/2;object-fit:cover;border-radius:14px;}
+#gallery .slide.fit img{object-fit:contain;background:#fff;}
 .slide figcaption{margin-top:10px;color:var(--muted);font-size:0.9rem;max-width:66ch;}
 .gallery-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;}
 .gallery-btn{

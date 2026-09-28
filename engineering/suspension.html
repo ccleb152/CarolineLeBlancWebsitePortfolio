@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suspension Geometry · CC LeBlanc</title>
+<title>Suspension Design · CC LeBlanc</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
 <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -14,7 +14,7 @@
     <div class="crumbs eng"><a href="../index.html">Home</a><span>/</span><a href="index.html">Engineering</a><span>/</span><span class="cur">Suspension Geometry</span></div>
     <div class="detail-head">
       <span class="status eng">Vehicle Dynamics Senior Engineer · Suspension Assistant Lead · 2024–2026</span>
-      <h1>Suspension Geometry</h1>
+      <h1>Suspension Geometry & Kinematics</h1>
       <p class="sub">Kinematics packages, damper tuning, and component fixes for two Crimson Racing FSAE competition cars.</p>
     </div>
 
@@ -37,29 +37,43 @@
       </article>
       <article class="win">
         <h3>FARO arm data &amp; tolerance standards</h3>
-        <p>I designed the suspension geometry package and set performance targets for camber, toe, and caster across the full travel range. Once the car was built, I measured it with a FARO arm to check it against the design, and implemented tolerance standards for how far the built suspension can deviate from it.</p>
+        <p>Designed the suspension geometry package and set performance targets for adjustments across the full travel range. Measured deviations with a FARO arm to check against design, and implemented tolerance standards for how far the built suspension can deviate.</p>
         <p class="result"><span>Result</span>Motion ratios within 1.3% of design.</p>
       </article>
       <article class="win">
         <h3>New bumpstop design</h3>
-        <p>I redesigned the suspension bumpstops from SBR rubber to a 3D-printed TPU part and tested 54 samples.</p>
+        <p>Redesigned the suspension bumpstops from SBR rubber to a 3D-printed TPU part and tested 54 samples. This was the initial solution for the rear axle oscillations.</p>
         <p class="result"><span>Result</span>Manufacturing deviation cut by 83%, from 192.7 to 32.5 lbf/in.</p>
       </article>
       <article class="win">
         <h3>Standardized driver feedback &amp; testing sheets</h3>
-        <p>I designed and deployed standardized driver feedback and testing sheets capturing the Cooper-Harper handling qualities scale alongside tire pressures, camber, and toe, so setups could be compared apples-to-apples across test days instead of relying on driver memory.</p>
-        <p class="result"><span>Result</span>Driver feedback and tire data used together to validate geometry choices against how the car actually drove.</p>
+        <p>Co-designed and deployed standardized driver feedback and testing sheets using the Cooper-Harper scale.</p>
+        <p class="result"><span>Result</span>Driver feedback and track data used together to validate setup choices.</p>
       </article>
     </div>
 
-    <figure class="photo">
-      <img src="../images/Suspensiongeo.jpg" alt="Alabama FSAE CR26I rear suspension with Öhlins dampers" loading="lazy">
-      <figcaption>CR26I rear suspension.</figcaption>
-    </figure>
+    <section id="gallery">
+      <div class="prose"><h2>Gallery</h2></div>
+      <div class="gallery" data-gallery>
+        <div class="gallery-track" tabindex="0" aria-label="Suspension photos, scroll or use the arrow buttons">
+          <figure class="slide fit"><img src="../images/suspension/cr26e-front-geometry.jpg" alt="CAD render of the CR26E front suspension geometry, pushrods and dampers mounted on the front frame" loading="lazy"><figcaption>CR26E front suspension geometry design.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/cr26e-rear-geometry.jpg" alt="CAD render of the CR26E rear suspension geometry, dampers and rockers mounted on the rear frame" loading="lazy"><figcaption>CR26E rear suspension geometry design.</figcaption></figure>
+          <figure class="slide"><img src="../images/suspension/carbon-rod-bonding.jpg" alt="Two team members in gloves and safety glasses bonding carbon suspension rods" loading="lazy"><figcaption>Carbon rod bonding and manufacturing.</figcaption></figure>
+          <figure class="slide"><img src="../images/Suspensiongeo.jpg" alt="Alabama FSAE CR26I rear suspension with Öhlins dampers" loading="lazy"><figcaption>CR26I rear suspension.</figcaption></figure>
+        </div>
+        <div class="gallery-nav">
+          <button type="button" class="gallery-btn" data-prev aria-label="Previous photo">←</button>
+          <div class="gallery-dots" role="tablist"></div>
+          <button type="button" class="gallery-btn" data-next aria-label="Next photo">→</button>
+        </div>
+      </div>
+    </section>
 
     <a class="back" href="index.html">← Back to Engineering</a>
 
 </main>
+
+<script src="../js/gallery.js"></script>
 
 </body>
 </html>
