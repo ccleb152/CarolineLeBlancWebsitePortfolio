@@ -227,6 +227,10 @@ main{max-width:980px;margin:0 auto;padding:0 28px 100px;}
 /* while only one project is public, show it as a wide feature card */
 .notable-grid:has(> .n-card:only-child){grid-template-columns:1fr;}
 .n-card:only-child .n-cover{aspect-ratio:16/9;}
+/* two public projects: split the row evenly */
+.notable-grid:has(> .n-card:nth-child(2):last-child){grid-template-columns:repeat(2,1fr);}
+.notable-grid:has(> .n-card:nth-child(2):last-child) .n-cover{aspect-ratio:4/3;}
+@media (max-width:640px){ .notable-grid:has(> .n-card:nth-child(2):last-child){grid-template-columns:1fr;} }
 .n-cover{
   position:relative;aspect-ratio:4/5;overflow:hidden;
   background:var(--eng-tint);border:1px solid var(--line);
