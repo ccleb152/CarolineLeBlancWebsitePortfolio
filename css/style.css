@@ -279,7 +279,7 @@ main{max-width:980px;margin:0 auto;padding:0 28px 100px;}
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg, rgba(10,10,10,.32), rgba(10,10,10,.58));
 }
-.fork-half.eng .fork-bg{background:url("../images/engineering.jpg") center 82%/cover no-repeat;}
+.fork-half.eng .fork-bg{background:url("../images/cr26-car.jpg") 60% 68%/cover no-repeat;}
 .fork-half.creative .fork-bg{background:url("../images/creative.jpg") center 40%/cover no-repeat;}
 .fork-half .cap{
   position:absolute;bottom:14px;z-index:1;
