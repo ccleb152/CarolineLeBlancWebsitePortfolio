@@ -499,8 +499,8 @@ main[data-parent="creative"] .back{color:var(--creative);}
 /* ---- contact ---- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
 @media (max-width:640px){ .contact-grid{grid-template-columns:1fr;} }
-.contact-card{border:1px solid var(--line);background:var(--surface);padding:22px;display:flex;flex-direction:column;gap:6px;}
-.contact-card .k{font-family:"Bebas Neue",sans-serif;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.contact-card{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:6px;}
+.contact-card .k{font-family:"Bebas Neue",sans-serif;font-size:1rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
 .contact-card .v{font-size:1.05rem;}
 .contact-card a{text-decoration:underline;text-underline-offset:3px;}
 
