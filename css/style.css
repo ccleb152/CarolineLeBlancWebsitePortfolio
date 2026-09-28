@@ -381,6 +381,26 @@ footer.pagefoot a{text-decoration:underline;text-underline-offset:3px;}
 .fact-row .f{background:var(--eng-tint);border-radius:18px;padding:18px 20px;}
 .fact-row .f .k{font-family:"Bebas Neue",sans-serif;font-size:0.85rem;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;}
 .fact-row .f .v{font-size:0.94rem;font-weight:600;margin-top:2px;}
+
+/* big-number result cards (same rounded look as .fact-row) */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:28px;}
+.stat{background:var(--eng-tint);border-radius:18px;padding:18px 20px;}
+.stat .num{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.1;color:var(--eng);white-space:nowrap;}
+.stat .lbl{font-size:0.85rem;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+/* accomplishment cards: what I did + measured result */
+.wins{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:4px;}
+.win:last-child:nth-child(odd){grid-column:1 / -1;}
+@media (max-width:700px){ .wins{grid-template-columns:1fr;} }
+.win{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;}
+.win h3{font-family:"Playfair Display",serif;font-weight:600;font-size:1.2rem;}
+.win p{margin:0;font-size:0.94rem;color:var(--muted);}
+.win .result{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);color:var(--ink);font-weight:600;}
+.win .result span{display:block;font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:0.08em;font-size:0.85rem;color:var(--eng);}
+
+.photo{margin:36px 0 0;}
+.photo img{width:100%;border-radius:18px;}
+.photo figcaption{margin-top:10px;color:var(--muted);font-size:0.9rem;}
 .prose{margin-top:30px;max-width:66ch;}
 .prose ul{padding-left:1.2em;display:flex;flex-direction:column;gap:10px;}
 .prose p{margin-top:0;}
