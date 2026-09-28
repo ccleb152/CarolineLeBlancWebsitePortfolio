@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suspension Design · CC LeBlanc</title>
+<title>Suspension &amp; Vehicle Dynamics · CC LeBlanc</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap">
 <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -11,10 +11,10 @@
 
 <main data-parent="engineering">
 
-    <div class="crumbs eng"><a href="../index.html">Home</a><span>/</span><a href="index.html">Engineering</a><span>/</span><span class="cur">Suspension Geometry</span></div>
+    <div class="crumbs eng"><a href="../index.html">Home</a><span>/</span><a href="index.html">Engineering</a><span>/</span><span class="cur">Suspension &amp; Vehicle Dynamics</span></div>
     <div class="detail-head">
       <span class="status eng">Vehicle Dynamics Senior Engineer · Suspension Assistant Lead · 2024–2026</span>
-      <h1>Suspension Geometry & Kinematics</h1>
+      <h1>Suspension &amp; Vehicle Dynamics</h1>
       <p class="sub">Kinematics packages, damper tuning, and component fixes for two Crimson Racing FSAE competition cars.</p>
     </div>
 
@@ -30,34 +30,110 @@
     </section>
 
     <div class="wins">
-      <article class="win">
-        <h3>Damper tuning &amp; analysis</h3>
-        <p>CR26I's rear axle was oscillating at the car's natural frequency. I retuned the damper setup to settle it.</p>
-        <p class="result"><span>Result</span>Lateral-g oscillation amplitude cut by 56%, helping the team place 6th (2025) and 8th (2026) overall at FSAE Michigan.</p>
+      <article class="win has-fig">
+        <div class="win-text">
+          <h3>Damper tuning &amp; analysis</h3>
+          <p>CR26I's rear axle was oscillating at the car's natural frequency. I retuned the damper setup to settle it.</p>
+          <p class="result"><span>Result</span>Lateral-g oscillation amplitude cut by 56%, helping the team place 6th (2025) and 8th (2026) overall at FSAE Michigan.</p>
+        </div>
+        <figure class="win-fig">
+          <a href="../images/suspension/damper-latg-trace.jpg" target="_blank" rel="noopener"><img src="../images/suspension/damper-latg-trace.jpg" alt="MoTeC data through the Boneyard minimum-radius turn: lateral g, yaw rate, and jounce oscillate heavily with the initial setup and settle with the final damper setup" loading="lazy"></a>
+          <figcaption>Through the Boneyard minimum-radius turn: initial setup (white) oscillates; the final setup (color) settles.</figcaption>
+        </figure>
       </article>
-      <article class="win">
-        <h3>FARO arm data &amp; tolerance standards</h3>
-        <p>Designed the suspension geometry package and set performance targets for adjustments across the full travel range. Measured deviations with a FARO arm to check against design, and implemented tolerance standards for how far the built suspension can deviate.</p>
-        <p class="result"><span>Result</span>Motion ratios within 1.3% of design.</p>
+
+      <article class="win has-fig">
+        <div class="win-text">
+          <h3>FARO arm data &amp; tolerance standards</h3>
+          <p>Designed the suspension geometry package and set performance targets for adjustments across the full travel range. Measured deviations with a FARO arm to check against design, and implemented tolerance standards for how far the built suspension can deviate.</p>
+          <p class="result"><span>Result</span>Motion ratios within 1.3% of design.</p>
+        </div>
+        <figure class="win-fig">
+          <a href="../images/suspension/faro-motion-ratio.jpg" target="_blank" rel="noopener"><img src="../images/suspension/faro-motion-ratio.jpg" alt="Front and rear motion ratio through chassis ride: designed curve versus measured CR26I corners" loading="lazy"></a>
+          <figcaption>Designed vs. measured motion ratio through ride, front and rear.</figcaption>
+        </figure>
+        <div class="tiers">
+          <div class="tier t1"><h4>Tier 1</h4><p>Unadjustable, risking drivability</p><ul><li>Frame integration tabs</li><li>Self-locking geometry</li><li>Wheel interface</li></ul></div>
+          <div class="tier t2"><h4>Tier 2</h4><p>Unadjustable, driveable</p><ul><li>Bumpsteer</li><li>Nominal toe</li><li>Anti-geometry</li><li>Camber curves</li></ul></div>
+          <div class="tier t3"><h4>Tier 3</h4><p>Adjustable through setup</p><ul><li>Ackermann</li><li>Caster / kingpin</li><li>Roll center height</li><li>Motion ratio</li></ul></div>
+          <p class="tiers-note">Every pickup point was ranked by kinematic effect and adjustability. All measured deviations fell within Tier 2 or Tier 3.</p>
+        </div>
       </article>
-      <article class="win">
-        <h3>New bumpstop design</h3>
-        <p>Redesigned the suspension bumpstops from SBR rubber to a 3D-printed TPU part and tested 54 samples. This was the initial solution for the rear axle oscillations.</p>
-        <p class="result"><span>Result</span>Manufacturing deviation cut by 83%, from 192.7 to 32.5 lbf/in.</p>
+
+      <article class="win has-fig">
+        <div class="win-text">
+          <h3>New bumpstop design</h3>
+          <p>Redesigned the suspension bumpstops from SBR rubber to a 3D-printed TPU part and tested 54 samples. This was the initial solution for the rear axle oscillations.</p>
+          <p class="result"><span>Result</span>Manufacturing deviation cut by 83%, from 192.7 to 32.5 lbf/in.</p>
+        </div>
+        <figure class="win-fig">
+          <a href="../images/suspension/bumpstop-rate-vs-diameter.jpg" target="_blank" rel="noopener"><img src="../images/suspension/bumpstop-rate-vs-diameter.jpg" alt="Scatter plot of TPU bumpstop spring rate versus outer diameter with an exponential fit" loading="lazy"></a>
+          <figcaption>TPU bumpstop spring rate vs. outer diameter, used to target a progressive rate.</figcaption>
+        </figure>
       </article>
-      <article class="win">
-        <h3>Standardized driver feedback &amp; testing sheets</h3>
-        <p>Co-designed and deployed standardized driver feedback and testing sheets using the Cooper-Harper scale.</p>
-        <p class="result"><span>Result</span>Driver feedback and track data used together to validate setup choices.</p>
+
+      <article class="win has-fig">
+        <div class="win-text">
+          <h3>Standardized driver feedback &amp; testing sheets</h3>
+          <p>Co-designed and deployed standardized driver feedback and testing sheets using the Cooper-Harper scale.</p>
+          <p class="result"><span>Result</span>Driver feedback and track data used together to validate setup choices.</p>
+        </div>
+        <figure class="win-fig">
+          <a href="../images/suspension/drive-day-sheet.jpg" target="_blank" rel="noopener"><img src="../images/suspension/drive-day-sheet.jpg" alt="Crimson Racing drive sheet with lap times, Cooper-Harper handling ratings, tire temperatures, and pressures" loading="lazy"></a>
+          <figcaption>A Crimson Racing drive sheet: lap times, Cooper-Harper ratings, tire temps and pressures.</figcaption>
+        </figure>
       </article>
+
+      <article class="win">
+        <div class="win-text">
+          <h3>Tire selection</h3>
+          <p>Scored six Hoosier options (R20 and LC0 compounds in 16×6, 16×7.5, and 18×6) in a weighted decision matrix across seven criteria: mass, yaw moment of inertia, cornering stiffness, peak lateral and longitudinal force, rotational inertia, and load sensitivity. The inputs came from my <a href="tire-model.html">Pacejka tire model</a>.</p>
+          <p class="result"><span>Result</span>Hoosier R20 16×7.5-10 chosen with the top weighted score (94.3 vs. 85.8 for the next best), cutting tire selection time by an estimated 50%.</p>
+        </div>
+      </article>
+
+      <article class="win has-fig">
+        <div class="win-text">
+          <h3>Suspension adjustability</h3>
+          <p>The suspension is built to be tuned at the track without new parts:</p>
+          <ul class="adjust">
+            <li><strong>Camber:</strong> upright shims</li>
+            <li><strong>Toe, caster, kingpin, ride height:</strong> rod end lengths</li>
+            <li><strong>Ackermann:</strong> bolted upright tie rod mounts</li>
+            <li><strong>Rear:</strong> alternate blade attachment points</li>
+            <li><strong>Wheel rate:</strong> springs, plus bumpstop packers to move the engagement point</li>
+          </ul>
+          <p class="result"><span>Result</span>Four Ackermann settings from 22.8% to 36.0%, with a minimum turning radius from 11.81 to 13.86 ft.</p>
+        </div>
+        <figure class="win-fig two">
+          <a href="../images/suspension/front-hub-adjustability.jpg" target="_blank" rel="noopener"><img src="../images/suspension/front-hub-adjustability.jpg" alt="CAD render of the front wheel hub and upright, inboard view, showing the alternate tie rod mounting points" loading="lazy"></a>
+          <a href="../images/suspension/ackermann-curves.jpg" target="_blank" rel="noopener"><img src="../images/suspension/ackermann-curves.jpg" alt="Ackermann percent through steering rack travel for the nominal, higher, lower, and larger steer angle settings" loading="lazy"></a>
+          <figcaption>Front hub with alternate tie rod mounts, and Ackermann % through steering travel for each setting.</figcaption>
+        </figure>
+      </article>
+    </div>
+
+    <section class="prose">
+      <h2>Tools</h2>
+    </section>
+    <div class="tool-strip">
+      <span>WinGeo3</span><span>SolidWorks</span><span>FARO Arm</span><span>MoTeC i2</span><span>MATLAB</span><span>Microsoft Excel</span>
     </div>
 
     <section id="gallery">
       <div class="prose"><h2>Gallery</h2></div>
       <div class="gallery" data-gallery>
-        <div class="gallery-track" tabindex="0" aria-label="Suspension photos, scroll or use the arrow buttons">
+        <div class="gallery-track" tabindex="0" aria-label="Suspension photos and figures, scroll or use the arrow buttons">
+          <figure class="slide fit"><img src="../images/suspension/cr26i-front-geometry.jpg" alt="CAD render of the CR26I front suspension geometry" loading="lazy"><figcaption>CR26I front suspension geometry.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/cr26i-rear-geometry.jpg" alt="CAD render of the CR26I rear suspension geometry" loading="lazy"><figcaption>CR26I rear suspension geometry.</figcaption></figure>
           <figure class="slide fit"><img src="../images/suspension/cr26e-front-geometry.jpg" alt="CAD render of the CR26E front suspension geometry, pushrods and dampers mounted on the front frame" loading="lazy"><figcaption>CR26E front suspension geometry design.</figcaption></figure>
           <figure class="slide fit"><img src="../images/suspension/cr26e-rear-geometry.jpg" alt="CAD render of the CR26E rear suspension geometry, dampers and rockers mounted on the rear frame" loading="lazy"><figcaption>CR26E rear suspension geometry design.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/damper-histograms-initial.jpg" alt="Initial damper velocity histograms for all four corners, with FL and RR circled for rebound-bump imbalance" loading="lazy"><figcaption>Initial damper velocity histograms: significant rebound-bump imbalance at FL and RR.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/damper-histograms-final.jpg" alt="Final damper velocity histograms for all four corners, more balanced between rebound and bump" loading="lazy"><figcaption>Final damper velocity histograms after retuning.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/toe-sweep-yaw-rate.jpg" alt="Bar charts of average yaw rate across front and rear toe settings from -2 to +2 degrees" loading="lazy"><figcaption>Toe sweep: effect of front and rear toe on corner entry and mid-corner yaw rate.</figcaption></figure>
+          <figure class="slide"><img src="../images/suspension/faro-arm-2.jpg" alt="Team member measuring suspension pickup points on the frame with a FARO arm" loading="lazy"><figcaption>Measuring frame pickup points with the FARO arm.</figcaption></figure>
+          <figure class="slide"><img src="../images/suspension/faro-arm-1.jpg" alt="Close-up of a FARO arm probe on a frame tab" loading="lazy"><figcaption>FARO arm probe on a suspension tab.</figcaption></figure>
+          <figure class="slide fit"><img src="../images/suspension/bumpstop-cad.jpg" alt="CAD render of the tapered 3D-printed TPU bumpstop" loading="lazy"><figcaption>Proposed TPU bumpstop design.</figcaption></figure>
           <figure class="slide"><img src="../images/suspension/carbon-rod-bonding.jpg" alt="Two team members in gloves and safety glasses bonding carbon suspension rods" loading="lazy"><figcaption>Carbon rod bonding and manufacturing.</figcaption></figure>
           <figure class="slide"><img src="../images/Suspensiongeo.jpg" alt="Alabama FSAE CR26I rear suspension with Öhlins dampers" loading="lazy"><figcaption>CR26I rear suspension.</figcaption></figure>
         </div>
